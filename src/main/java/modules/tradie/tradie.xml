@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="http://www.skyve.org/xml/module" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" title="Tradie" prototype="true" name="tradie" xsi:schemaLocation="http://www.skyve.org/xml/module ../../schemas/module.xsd">
+    <homeRef>list</homeRef>
+    <homeDocument>ServiceType</homeDocument>
+    <documents>
+        <document ref="ServiceType"/>
+        <document ref="Provider"/>
+    </documents>
+    <roles>
+        <role name="Viewer">
+            <description><![CDATA[Enough privileges to view Tradie documents.]]></description>
+            <privileges>
+                <document name="ServiceType" permission="_R__C"/>
+                <document name="Provider" permission="_R__C"/>
+            </privileges>
+        </role>
+        <role name="Maintainer">
+            <description><![CDATA[Enough privileges to create and edit Tradie documents.]]></description>
+            <privileges>
+                <document name="ServiceType" permission="CRUDC"/>
+                <document name="Provider" permission="CRUDC"/>
+            </privileges>
+        </role>
+    </roles>
+    <menu>
+        <list document="ServiceType" name="Service Types">
+            <role name="Maintainer"/>
+            <role name="Viewer"/>
+        </list>
+        <list document="Provider" name="Providers">
+            <role name="Maintainer"/>
+            <role name="Viewer"/>
+        </list>
+    </menu>
+</module>
