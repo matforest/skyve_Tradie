@@ -7,7 +7,6 @@
     <defaultTimestampConverter>DD_MMM_YYYY_HH24_MI_SS</defaultTimestampConverter>
     <modules homeModule="admin">
         <module name="admin"/>
-        <module name="tradie"/>
     </modules>
     <interceptors>
         <interceptor className="modules.admin.RDBMSAuditInterceptor"/>
