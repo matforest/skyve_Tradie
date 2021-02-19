@@ -1,38 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document xmlns="http://www.skyve.org/xml/document"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="JobRequest"
-	xsi:schemaLocation="http://www.skyve.org/xml/document ../../../schemas/document.xsd">
+<document
+	xmlns="http://www.skyve.org/xml/document"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	name="JobRequest"
+	xsi:schemaLocation="http://www.skyve.org/xml/document ../../../schemas/document.xsd"
+>
 	<persistent name="TRA_JobRequest" />
 	<singularAlias>Job Request</singularAlias>
 	<pluralAlias>Job Requests</pluralAlias>
 	<iconStyleClass>fa fa-file-text</iconStyleClass>
 	<bizKey expression="Job Request - {customerName}" />
 	<attributes>
-		<text required="true" name="customerName">
+		<text
+			required="true"
+			name="customerName"
+		>
 			<displayName>Customer Name</displayName>
 			<length>100</length>
 		</text>
-		<text required="true" name="phone">
+		<text
+			required="true"
+			name="phone"
+		>
 			<displayName>Phone</displayName>
 			<length>50</length>
 		</text>
-		<text required="true" name="address">
+		<text
+			required="true"
+			name="address"
+		>
 			<displayName>Address</displayName>
 			<length>250</length>
 		</text>
-		<memo required="true" name="directions">
+		<memo
+			required="true"
+			name="directions"
+		>
 			<displayName>Directions</displayName>
 		</memo>
-		<memo required="true" name="description">
+		<memo
+			required="true"
+			name="description"
+		>
 			<displayName>Description</displayName>
 		</memo>
-		<association required="true" type="aggregation"
-			name="requestType">
+		<association
+			required="true"
+			type="aggregation"
+			name="requestType"
+		>
 			<displayName>Request Type</displayName>
 			<description><![CDATA[The type of the service request]]></description>
 			<documentName>ServiceType</documentName>
 		</association>
-		<enum required="true" name="urgency">
+		<enum
+			required="true"
+			name="urgency"
+		>
 			<displayName>Urgency</displayName>
 			<description><![CDATA[How soon does this request need to be fullfilled?]]></description>
 			<values>
@@ -41,7 +65,10 @@
 				<value code="Not urgent" />
 			</values>
 		</enum>
-		<enum required="true" name="state">
+		<enum
+			required="true"
+			name="state"
+		>
 			<displayName>State</displayName>
 			<description><![CDATA[Current state of this job request]]></description>
 			<defaultValue>submitted</defaultValue>
@@ -55,6 +82,14 @@
 				<value code="Cancelled" />
 			</values>
 		</enum>
+		<association
+			required="false"
+			type="aggregation"
+			name="assignedProvider"
+		>
+			<displayName>Assigned Provider</displayName>
+			<documentName>Provider</documentName>
+		</association>
 	</attributes>
 	<conditions>
 		<condition name="created">

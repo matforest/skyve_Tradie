@@ -19,6 +19,7 @@ import org.skyve.metadata.model.document.Bizlet.DomainValue;
  * @depend - - - Urgency
  * @depend - - - State
  * @navhas n requestType 1 ServiceType
+ * @navhas n assignedProvider 0..1 Provider
  * @stereotype "persistent"
  */
 @XmlType
@@ -51,6 +52,8 @@ public class JobRequest extends AbstractPersistentBean {
 	public static final String urgencyPropertyName = "urgency";
 	/** @hidden */
 	public static final String statePropertyName = "state";
+	/** @hidden */
+	public static final String assignedProviderPropertyName = "assignedProvider";
 
 	/**
 	 * Urgency
@@ -254,6 +257,10 @@ public class JobRequest extends AbstractPersistentBean {
 	 * Current state of this job request
 	 **/
 	private State state = State.submitted;
+	/**
+	 * Assigned Provider
+	 **/
+	private Provider assignedProvider = null;
 
 	@Override
 	@XmlTransient
@@ -440,6 +447,26 @@ public class JobRequest extends AbstractPersistentBean {
 	public void setState(State state) {
 		preset(statePropertyName, state);
 		this.state = state;
+	}
+
+	/**
+	 * {@link #assignedProvider} accessor.
+	 * @return	The value.
+	 **/
+	public Provider getAssignedProvider() {
+		return assignedProvider;
+	}
+
+	/**
+	 * {@link #assignedProvider} mutator.
+	 * @param assignedProvider	The new value.
+	 **/
+	@XmlElement
+	public void setAssignedProvider(Provider assignedProvider) {
+		if (this.assignedProvider != assignedProvider) {
+			preset(assignedProviderPropertyName, assignedProvider);
+			this.assignedProvider = assignedProvider;
+		}
 	}
 
 	/**

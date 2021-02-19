@@ -1,51 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module xmlns="http://www.skyve.org/xml/module" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" title="Tradie" prototype="true" name="tradie" xsi:schemaLocation="http://www.skyve.org/xml/module ../../schemas/module.xsd">
-    <homeRef>list</homeRef>
-    <homeDocument>ServiceType</homeDocument>
-    <documents>
-        <document ref="ServiceType"/>
-        <document ref="Provider"/>
-        <document ref="JobRequest"/>
-        <document ref="Contact" moduleRef="admin"/>
-        <document ref="DataGroup" moduleRef="admin"/>
-        <document ref="User" moduleRef="admin"/>
-    </documents>
-    <roles>
-        <role name="Customer">
-            <description><![CDATA[Enough privileges to create Job Requests.]]></description>
-            <privileges>
-                <document name="ServiceType" permission="_R__C"/>
-                <document name="Provider" permission="_R__C"/>
-                <document name="JobRequest" permission="CR__C"/>
-            </privileges>
-        </role>
-        <role name="ProviderRole">
-            <description><![CDATA[Enough privileges to view Tradie documents.]]></description>
-            <privileges>
-                <document name="ServiceType" permission="_R__C"/>
-                <document name="Provider" permission="_RU_C"/>
-                <document name="JobRequest" permission="_R__C"/>
-            </privileges>
-        </role>
-        <role name="Maintainer">
-            <description><![CDATA[Enough privileges to create and edit Tradie documents.]]></description>
-            <privileges>
-                <document name="ServiceType" permission="CRUDC"/>
-                <document name="Provider" permission="CRUDC"/>
-                <document name="JobRequest" permission="CRUDC"/>
-            </privileges>
-        </role>
-    </roles>
-    <menu>
-        <list document="ServiceType" name="Service Types">
-            <role name="Maintainer"/>
-        </list>
-        <list document="Provider" name="Providers">
-            <role name="Maintainer"/>
-        </list>
-        <list document="JobRequest" name="Job Requests">
-            <role name="Maintainer"/>
-            <role name="ProviderRole"/>
-        </list>
-    </menu>
+<module
+	xmlns="http://www.skyve.org/xml/module"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	title="Tradie"
+	prototype="true"
+	name="tradie"
+	xsi:schemaLocation="http://www.skyve.org/xml/module ../../schemas/module.xsd"
+>
+	<homeRef>list</homeRef>
+	<homeDocument>ServiceType</homeDocument>
+	<documents>
+		<document ref="ServiceType" />
+		<document ref="Provider" />
+		<document ref="JobRequest" />
+		<document
+			ref="Contact"
+			moduleRef="admin" />
+		<document
+			ref="DataGroup"
+			moduleRef="admin" />
+		<document
+			ref="User"
+			moduleRef="admin" />
+	</documents>
+	<roles>
+		<role name="Customer">
+			<description><![CDATA[Enough privileges to create Job Requests.]]></description>
+			<privileges>
+				<document
+					name="ServiceType"
+					permission="_R__C" />
+				<document
+					name="Provider"
+					permission="_R__C" />
+				<document
+					name="JobRequest"
+					permission="CR__C" />
+			</privileges>
+		</role>
+		<role name="ProviderRole">
+			<description><![CDATA[Enough privileges to view Tradie documents.]]></description>
+			<privileges>
+				<document
+					name="ServiceType"
+					permission="_R__C" />
+				<document
+					name="Provider"
+					permission="_RU_C" />
+				<document
+					name="JobRequest"
+					permission="_RU_C" />
+			</privileges>
+		</role>
+		<role name="Maintainer">
+			<description><![CDATA[Enough privileges to create and edit Tradie documents.]]></description>
+			<privileges>
+				<document
+					name="ServiceType"
+					permission="CRUDC" />
+				<document
+					name="Provider"
+					permission="CRUDC" />
+				<document
+					name="JobRequest"
+					permission="CRUDC" />
+			</privileges>
+		</role>
+	</roles>
+	<menu>
+		<list
+			document="JobRequest"
+			name="Job Requests"
+		>
+			<role name="Maintainer" />
+			<role name="ProviderRole" />
+		</list>
+		<list
+			document="Provider"
+			name="Providers"
+		>
+			<role name="Maintainer" />
+			<role name="ProviderRole" />
+		</list>
+		<list
+			document="ServiceType"
+			name="Service Types"
+		>
+			<role name="Maintainer" />
+		</list>
+		<list
+			query="qAvailableJobRequests"
+			name="Available Job Requests"
+		>
+			<role name="Maintainer" />
+			<role name="ProviderRole" />
+		</list>
+	</menu>
+	<queries>
+		<query
+			documentName="JobRequest"
+			name="qAvailableJobRequests"
+		>
+			<description><![CDATA[Show only Job Requests which match the Services provider by this Provider.]]></description>
+			<from>
+				  {tradie.JobRequest} as bean
+				, {tradie.Provider} as p
+			</from>
+			<filter>
+			 	bean.requestType MEMBER OF p.servicesProvided and p.providerUser.bizId = {USERID} 
+			 </filter>
+			<columns>
+				<column
+					binding="urgency"
+					sortOrder="ascending" />
+				<column binding="requestType" />
+				<column binding="state">
+					<filterOperator>equal</filterOperator>
+					<filterExpression>submitted</filterExpression>
+					<projected>false</projected>
+				</column>
+			</columns>
+		</query>
+	</queries>
 </module>

@@ -36,6 +36,7 @@
 				<param name="enumClass">modules.tradie.domain.JobRequest$State</param>
 			</type>
 		</property>
+		<many-to-one name="assignedProvider" entity-name="tradieProvider" column="assignedProvider_id" cascade="persist,save-update,refresh,merge" foreign-key="FK_TRA_JobRequest_assignedProvider"/>
 		<filter name="tradieJobRequestNoneFilter" condition="1=0"/>
 		<filter name="tradieJobRequestCustomerFilter" condition="bizCustomer=:customerParam"/>
 		<filter name="tradieJobRequestDataGroupIdFilter" condition="bizDataGroupId=:dataGroupIdParam"/>
