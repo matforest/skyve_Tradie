@@ -31,6 +31,11 @@
 				<param name="enumClass">modules.tradie.domain.JobRequest$Urgency</param>
 			</type>
 		</property>
+		<property name="state" length="9">
+			<type name="Enum">
+				<param name="enumClass">modules.tradie.domain.JobRequest$State</param>
+			</type>
+		</property>
 		<filter name="tradieJobRequestNoneFilter" condition="1=0"/>
 		<filter name="tradieJobRequestCustomerFilter" condition="bizCustomer=:customerParam"/>
 		<filter name="tradieJobRequestDataGroupIdFilter" condition="bizDataGroupId=:dataGroupIdParam"/>

@@ -17,6 +17,7 @@ import org.skyve.metadata.model.document.Bizlet.DomainValue;
  * Job Request
  * 
  * @depend - - - Urgency
+ * @depend - - - State
  * @navhas n requestType 1 ServiceType
  * @stereotype "persistent"
  */
@@ -48,6 +49,8 @@ public class JobRequest extends AbstractPersistentBean {
 	public static final String requestTypePropertyName = "requestType";
 	/** @hidden */
 	public static final String urgencyPropertyName = "urgency";
+	/** @hidden */
+	public static final String statePropertyName = "state";
 
 	/**
 	 * Urgency
@@ -130,6 +133,90 @@ public class JobRequest extends AbstractPersistentBean {
 	}
 
 	/**
+	 * State
+	 * <br/>
+	 * Current state of this job request
+	 **/
+	@XmlEnum
+	public static enum State implements Enumeration {
+		submitted("Submitted", "Submitted"),
+		booked("Booked", "Booked"),
+		confirmed("Confirmed", "Confirmed"),
+		resolved("Resolved", "Resolved"),
+		invoiced("Invoiced", "Invoiced"),
+		paid("Paid", "Paid"),
+		cancelled("Cancelled", "Cancelled");
+
+		private String code;
+		private String description;
+
+		/** @hidden */
+		private DomainValue domainValue;
+
+		/** @hidden */
+		private static List<DomainValue> domainValues;
+
+		private State(String code, String description) {
+			this.code = code;
+			this.description = description;
+			this.domainValue = new DomainValue(code, description);
+		}
+
+		@Override
+		public String toCode() {
+			return code;
+		}
+
+		@Override
+		public String toDescription() {
+			return description;
+		}
+
+		@Override
+		public DomainValue toDomainValue() {
+			return domainValue;
+		}
+
+		public static State fromCode(String code) {
+			State result = null;
+
+			for (State value : values()) {
+				if (value.code.equals(code)) {
+					result = value;
+					break;
+				}
+			}
+
+			return result;
+		}
+
+		public static State fromDescription(String description) {
+			State result = null;
+
+			for (State value : values()) {
+				if (value.description.equals(description)) {
+					result = value;
+					break;
+				}
+			}
+
+			return result;
+		}
+
+		public static List<DomainValue> toDomainValues() {
+			if (domainValues == null) {
+				State[] values = values();
+				domainValues = new ArrayList<>(values.length);
+				for (State value : values) {
+					domainValues.add(value.domainValue);
+				}
+			}
+
+			return domainValues;
+		}
+	}
+
+	/**
 	 * Customer Name
 	 **/
 	private String customerName;
@@ -161,6 +248,12 @@ public class JobRequest extends AbstractPersistentBean {
 	 * How soon does this request need to be fullfilled?
 	 **/
 	private Urgency urgency;
+	/**
+	 * State
+	 * <br/>
+	 * Current state of this job request
+	 **/
+	private State state;
 
 	@Override
 	@XmlTransient
@@ -329,5 +422,23 @@ public class JobRequest extends AbstractPersistentBean {
 	public void setUrgency(Urgency urgency) {
 		preset(urgencyPropertyName, urgency);
 		this.urgency = urgency;
+	}
+
+	/**
+	 * {@link #state} accessor.
+	 * @return	The value.
+	 **/
+	public State getState() {
+		return state;
+	}
+
+	/**
+	 * {@link #state} mutator.
+	 * @param state	The new value.
+	 **/
+	@XmlElement
+	public void setState(State state) {
+		preset(statePropertyName, state);
+		this.state = state;
 	}
 }
