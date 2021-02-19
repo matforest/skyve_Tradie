@@ -253,7 +253,7 @@ public class JobRequest extends AbstractPersistentBean {
 	 * <br/>
 	 * Current state of this job request
 	 **/
-	private State state;
+	private State state = State.submitted;
 
 	@Override
 	@XmlTransient

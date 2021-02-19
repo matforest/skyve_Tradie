@@ -41,6 +41,7 @@
         <enum required="true" name="state">
             <displayName>State</displayName>
             <description><![CDATA[Current state of this job request]]></description>
+            <defaultValue>submitted</defaultValue>
             <values>
                 <value code="Submitted"/>
                 <value code="Booked"/>
