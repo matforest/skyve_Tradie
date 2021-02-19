@@ -6,6 +6,9 @@
         <document ref="ServiceType"/>
         <document ref="Provider"/>
         <document ref="JobRequest"/>
+        <document ref="Contact" moduleRef="admin"/>
+        <document ref="DataGroup" moduleRef="admin"/>
+        <document ref="User" moduleRef="admin"/>
     </documents>
     <roles>
         <role name="Viewer">

@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import modules.admin.User.UserExtension;
 import org.skyve.CORE;
 import org.skyve.domain.messages.DomainException;
 import org.skyve.impl.domain.AbstractPersistentBean;
@@ -14,6 +15,7 @@ import org.skyve.impl.domain.ChangeTrackingArrayList;
  * Provider
  * 
  * @navhas n servicesProvided 1..n ServiceType
+ * @navhas n providerUser 1 User
  * @stereotype "persistent"
  */
 @XmlType
@@ -40,6 +42,8 @@ public class Provider extends AbstractPersistentBean {
 	public static final String phonePropertyName = "phone";
 	/** @hidden */
 	public static final String servicesProvidedPropertyName = "servicesProvided";
+	/** @hidden */
+	public static final String providerUserPropertyName = "providerUser";
 
 	/**
 	 * Name
@@ -61,6 +65,10 @@ public class Provider extends AbstractPersistentBean {
 	 * Services Provided
 	 **/
 	private List<ServiceType> servicesProvided = new ChangeTrackingArrayList<>("servicesProvided", this);
+	/**
+	 * Provider User
+	 **/
+	private UserExtension providerUser = null;
 
 	@Override
 	@XmlTransient
@@ -233,5 +241,25 @@ public class Provider extends AbstractPersistentBean {
 	 **/
 	public ServiceType removeServicesProvidedElement(int index) {
 		return servicesProvided.remove(index);
+	}
+
+	/**
+	 * {@link #providerUser} accessor.
+	 * @return	The value.
+	 **/
+	public UserExtension getProviderUser() {
+		return providerUser;
+	}
+
+	/**
+	 * {@link #providerUser} mutator.
+	 * @param providerUser	The new value.
+	 **/
+	@XmlElement
+	public void setProviderUser(UserExtension providerUser) {
+		if (this.providerUser != providerUser) {
+			preset(providerUserPropertyName, providerUser);
+			this.providerUser = providerUser;
+		}
 	}
 }

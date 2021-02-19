@@ -28,5 +28,9 @@
             <minCardinality>1</minCardinality>
             <ordering/>
         </collection>
+        <association required="true" type="aggregation" name="providerUser">
+            <displayName>Provider User</displayName>
+            <documentName>User</documentName>
+        </association>
     </attributes>
 </document>

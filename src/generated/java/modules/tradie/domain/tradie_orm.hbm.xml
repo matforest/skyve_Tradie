@@ -54,6 +54,7 @@
 			<key column="owner_id" foreign-key="FK_TRA_Provider_servicesProvided_owner_id" />
 			<many-to-many entity-name="tradieServiceType" foreign-key="FK_TRA_Provider_servicesProvided_element_id" column="element_id" />
 		</bag>
+		<many-to-one name="providerUser" entity-name="adminUser" column="providerUser_id" cascade="persist,save-update,refresh,merge" foreign-key="FK_TRA_Provider_providerUser"/>
 		<filter name="tradieProviderNoneFilter" condition="1=0"/>
 		<filter name="tradieProviderCustomerFilter" condition="bizCustomer=:customerParam"/>
 		<filter name="tradieProviderDataGroupIdFilter" condition="bizDataGroupId=:dataGroupIdParam"/>
