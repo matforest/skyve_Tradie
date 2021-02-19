@@ -3,7 +3,7 @@
     <persistent name="TRA_ServiceType"/>
     <singularAlias>Service Type</singularAlias>
     <pluralAlias>Service Types</pluralAlias>
-    <iconStyleClass>fa fa-fa-wrench</iconStyleClass>
+    <iconStyleClass>fa fa-wrench</iconStyleClass>
     <bizKey expression="Service Type - {name}"/>
     <attributes>
         <text required="true" name="name">

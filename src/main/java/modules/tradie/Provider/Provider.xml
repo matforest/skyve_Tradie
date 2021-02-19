@@ -3,7 +3,7 @@
     <persistent name="TRA_Provider"/>
     <singularAlias>Provider</singularAlias>
     <pluralAlias>Providers</pluralAlias>
-    <iconStyleClass>fa fa-fa-user</iconStyleClass>
+    <iconStyleClass>fa fa-user</iconStyleClass>
     <bizKey expression="Provider - {name}"/>
     <attributes>
         <text required="true" name="name">

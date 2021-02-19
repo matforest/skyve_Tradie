@@ -3,7 +3,7 @@
     <persistent name="TRA_JobRequest"/>
     <singularAlias>Job Request</singularAlias>
     <pluralAlias>Job Requests</pluralAlias>
-    <iconStyleClass>fa fa-fa-file-text</iconStyleClass>
+    <iconStyleClass>fa fa-file-text</iconStyleClass>
     <bizKey expression="Job Request - {customerName}"/>
     <attributes>
         <text required="true" name="customerName">
