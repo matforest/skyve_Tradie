@@ -441,4 +441,25 @@ public class JobRequest extends AbstractPersistentBean {
 		preset(statePropertyName, state);
 		this.state = state;
 	}
+
+	/**
+	 * Created
+	 *
+	 * @return The condition
+	 */
+	@XmlTransient
+	@Override
+	public boolean isCreated() {
+		return (isPersisted());
+	}
+
+	/**
+	 * {@link #isCreated} negation.
+	 *
+	 * @return The negated condition
+	 */
+	@Override
+	public boolean isNotCreated() {
+		return (! isCreated());
+	}
 }
