@@ -11,11 +11,19 @@
         <document ref="User" moduleRef="admin"/>
     </documents>
     <roles>
-        <role name="Viewer">
-            <description><![CDATA[Enough privileges to view Tradie documents.]]></description>
+        <role name="Customer">
+            <description><![CDATA[Enough privileges to create Job Requests.]]></description>
             <privileges>
                 <document name="ServiceType" permission="_R__C"/>
                 <document name="Provider" permission="_R__C"/>
+                <document name="JobRequest" permission="CR__C"/>
+            </privileges>
+        </role>
+        <role name="ProviderRole">
+            <description><![CDATA[Enough privileges to view Tradie documents.]]></description>
+            <privileges>
+                <document name="ServiceType" permission="_R__C"/>
+                <document name="Provider" permission="_RU_C"/>
                 <document name="JobRequest" permission="_R__C"/>
             </privileges>
         </role>
@@ -31,15 +39,13 @@
     <menu>
         <list document="ServiceType" name="Service Types">
             <role name="Maintainer"/>
-            <role name="Viewer"/>
         </list>
         <list document="Provider" name="Providers">
             <role name="Maintainer"/>
-            <role name="Viewer"/>
         </list>
         <list document="JobRequest" name="Job Requests">
             <role name="Maintainer"/>
-            <role name="Viewer"/>
+            <role name="ProviderRole"/>
         </list>
     </menu>
 </module>
