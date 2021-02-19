@@ -5,6 +5,7 @@
     <documents>
         <document ref="ServiceType"/>
         <document ref="Provider"/>
+        <document ref="JobRequest"/>
     </documents>
     <roles>
         <role name="Viewer">
@@ -12,6 +13,7 @@
             <privileges>
                 <document name="ServiceType" permission="_R__C"/>
                 <document name="Provider" permission="_R__C"/>
+                <document name="JobRequest" permission="_R__C"/>
             </privileges>
         </role>
         <role name="Maintainer">
@@ -19,6 +21,7 @@
             <privileges>
                 <document name="ServiceType" permission="CRUDC"/>
                 <document name="Provider" permission="CRUDC"/>
+                <document name="JobRequest" permission="CRUDC"/>
             </privileges>
         </role>
     </roles>
@@ -28,6 +31,10 @@
             <role name="Viewer"/>
         </list>
         <list document="Provider" name="Providers">
+            <role name="Maintainer"/>
+            <role name="Viewer"/>
+        </list>
+        <list document="JobRequest" name="Job Requests">
             <role name="Maintainer"/>
             <role name="Viewer"/>
         </list>

@@ -11,6 +11,32 @@
 	<typedef name="TimeOnly" class="org.skyve.impl.domain.types.TimeOnlyUserType" />
 	<typedef name="Timestamp" class="org.skyve.impl.domain.types.TimestampUserType" />
 	<typedef name="Enum" class="org.skyve.impl.domain.types.EnumUserType" />
+	<class name="modules.tradie.domain.JobRequest" table="TRA_JobRequest" entity-name="tradieJobRequest">
+		<id name="bizId" length="36" />
+		<version name="bizVersion" unsaved-value="null" />
+		<property name="bizLock" type="OptimisticLock" length="271" not-null="true" />
+		<property name="bizKey" length="1024" not-null="true" />
+		<property name="bizCustomer" length="50" not-null="true" />
+		<property name="bizFlagComment" length="1024" />
+		<property name="bizDataGroupId" length="36" />
+		<property name="bizUserId" length="36" not-null="true" />
+		<property name="customerName" length="100" />
+		<property name="phone" length="50" />
+		<property name="address" length="250" />
+		<property name="directions" type="text" />
+		<property name="description" type="text" />
+		<many-to-one name="requestType" entity-name="tradieServiceType" column="requestType_id" cascade="persist,save-update,refresh,merge" foreign-key="FK_TRA_JobRequest_requestType"/>
+		<property name="urgency" length="18">
+			<type name="Enum">
+				<param name="enumClass">modules.tradie.domain.JobRequest$Urgency</param>
+			</type>
+		</property>
+		<filter name="tradieJobRequestNoneFilter" condition="1=0"/>
+		<filter name="tradieJobRequestCustomerFilter" condition="bizCustomer=:customerParam"/>
+		<filter name="tradieJobRequestDataGroupIdFilter" condition="bizDataGroupId=:dataGroupIdParam"/>
+		<filter name="tradieJobRequestUserIdFilter" condition="bizUserId=:userIdParam"/>
+	</class>
+
 	<class name="modules.tradie.domain.Provider" table="TRA_Provider" entity-name="tradieProvider">
 		<id name="bizId" length="36" />
 		<version name="bizVersion" unsaved-value="null" />
@@ -50,6 +76,16 @@
 		<filter name="tradieServiceTypeUserIdFilter" condition="bizUserId=:userIdParam"/>
 	</class>
 
+	<filter-def name="tradieJobRequestNoneFilter" />
+	<filter-def name="tradieJobRequestCustomerFilter">
+		<filter-param name="customerParam" type="string"/>
+	</filter-def>
+	<filter-def name="tradieJobRequestDataGroupIdFilter">
+		<filter-param name="dataGroupIdParam" type="string"/>
+	</filter-def>
+	<filter-def name="tradieJobRequestUserIdFilter">
+		<filter-param name="userIdParam" type="string"/>
+	</filter-def>
 	<filter-def name="tradieProviderNoneFilter" />
 	<filter-def name="tradieProviderCustomerFilter">
 		<filter-param name="customerParam" type="string"/>
